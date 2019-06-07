@@ -55,29 +55,21 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('employer.register') }}">{{ __('Employer Register') }}</a>
                             </li>
-
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('   Job Seeker Register') }}</a>
                                 </li>
                             @endif
-
-
                         @else
-                         @if(Auth::user()->user_type=='employer')
-
+                        @if(Auth::user()->user_type=='employer')
                         <li>
                             <a href="{{route('job.create')}}"><button class="btn btn-secondary">Post a job</button></a>
                         </li>
                         @endif
-
-
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-
                                 @if(Auth::user()->user_type == 'employer')
                                     {{Auth::user()->company->cname}}
-
                                 @endif
                                 @if(Auth::user()->user_type == 'seeker')
                                     {{Auth::user()->name}}
@@ -85,9 +77,7 @@
 
                                     <span class="caret"></span>
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
                                 @if(Auth::user()->user_type=='employer')
                                 <a class="dropdown-item" href="{{ route('company.view') }}"
                                        >
@@ -96,10 +86,9 @@
                                     <a class="dropdown-item" href="{{route('my.job')}}">
                                         MyJobs
                                     </a>
-                                    {{-- <a class="dropdown-item" href="{{route('applicant')}}">Applicants</a> --}}
+                                    <a class="dropdown-item" href="{{route('applicant')}}">Applicants</a>
 
                                 @else
-
 
                                     <a class="dropdown-item" href="{{route('user.profile')}}"
                                        >

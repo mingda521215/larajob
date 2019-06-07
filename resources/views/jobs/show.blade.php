@@ -30,24 +30,21 @@
                     <p>Conmany: <a href="{{ route('company.index', [$job->company->id, $job->company->slug]) }}">{{ $job->company->cname }}</a></p>
                     <p>Address: {{ $job->address }}</p>
                     <p>Employment Type: {{ $job->type }}</p>
-                    <p>Ppsition: {{ $job->position }}</p>
-                    <p>Date: {{ $job->created_at->diffForHumans() }}</p>
+                    <p>Position: {{ $job->position }}</p>
+                    <p>Posted: {{ $job->created_at->diffForHumans() }}</p>
+                    <p>Last date to apply: {{ date('F d, Y', strtotime($job->last_date)) }}</p>
 
                 </div>
             </div>
             <br>
-            @if(Auth::check() && Auth::user()->user_type = 'seeker')
+            @if(Auth::check()&&Auth::user()->user_type=='seeker')
             @if(!$job->checkApplication())
-            <form action="{{ route('apply', [$job->id]) }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-success" style="width: 100%">Apply</button>
-            </form>
+            <apply-component :jobid={{$job->id}}></apply-component>
             @endif
+            <br>
+            <favorite-component :jobid={{$job->id}} :favorited={{$job->checkSaved()?'true':'false'}}  ></favorite-component>
             @endif
         </div>
-        {{-- <div class="col-md-4">
-            asdf
-        </div> --}}
     </div>
 </div>
 @endsection
